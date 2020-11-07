@@ -1,5 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Search from './Search'
 
 const styles = {
   container: {
@@ -8,5 +10,10 @@ const styles = {
   },
 }
 export default function Home() {
-  return <Container style={styles.container}></Container>
+  return (
+    <>
+      <Search />
+      <Container style={styles.container}></Container>
+    </>
+  )
 }
