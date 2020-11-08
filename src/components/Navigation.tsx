@@ -22,18 +22,34 @@ const styles = {
 }
 
 export default function Navigation() {
+  const handleClick = () => {
+    localStorage.removeItem('authToken')
+    window.location.reload()
+  }
   return (
     <Navbar style={styles.nav} expand='lg'>
       <Navbar.Brand as={Link} to='/' style={styles.brand}>
         Linkup
       </Navbar.Brand>
       <Nav style={styles.navRight}>
-        <Nav.Link as={Link} to='/login'>
-          Login
-        </Nav.Link>
-        <Nav.Link as={Link} to='/register'>
-          Register
-        </Nav.Link>
+        {localStorage.getItem('authToken') ? (
+          <>
+            <Nav.Link as={Link} to='/profile'>
+              Profile
+            </Nav.Link>
+            <Nav.Link onClick={() => handleClick()}>Log off</Nav.Link>
+          </>
+        ) : (
+          <>
+            {' '}
+            <Nav.Link as={Link} to='/login'>
+              Login
+            </Nav.Link>
+            <Nav.Link as={Link} to='/register'>
+              Register
+            </Nav.Link>{' '}
+          </>
+        )}
       </Nav>
     </Navbar>
   )

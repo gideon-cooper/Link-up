@@ -9,12 +9,35 @@
       name="description"
       content="Web site created using create-react-app"
     />
-   
+
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: 'AIzaSyBatTI3QBsev4N4NHyOVCSSmGzvJvE6ftA',
+        authDomain: 'linkup-a14d2.firebaseapp.com',
+        databaseURL: 'https://linkup-a14d2.firebaseio.com',
+        projectId: 'linkup-a14d2',
+        storageBucket: 'linkup-a14d2.appspot.com',
+        messagingSenderId: '442553114639',
+        appId: '1:442553114639:web:27e1f181d15921736a037a',
+        measurementId: 'G-VF47NRGDP9',
+      }
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig)
+      firebase.analytics()
+    </script>
   </body>
 </html>
