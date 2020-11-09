@@ -2,7 +2,7 @@ import {ADD_EVENT} from "../actions"
 
 const initialState = []
 
-const event = (state = initialState, action) => {
+const addEvent = (state = initialState, action) => {
     switch(action.type){
         case ADD_EVENT:
             return [...state, action.event]
@@ -10,4 +10,4 @@ const event = (state = initialState, action) => {
             return state
     }
 }
-export default event
+export default addEvent

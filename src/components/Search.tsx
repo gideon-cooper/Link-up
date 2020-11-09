@@ -29,7 +29,7 @@ const styles = {
 }
 export default function Search() {
   const dispatch = useDispatch()
-  
+
   return (
     <Container fluid style={styles.searchContainer}>
       <Row style={styles.searchText}>
@@ -39,7 +39,9 @@ export default function Search() {
         <Form inline>
           <FormControl type='text' placeholder='Search' />
           <Button
-            onClick={() => dispatch(addEvent({ name: 'john' }))}
+            onClick={() =>
+              dispatch(addEvent([{ name: 'john' }, { name: 'BEN' }]))
+            }
             variant='outline-danger'
           >
             Search
