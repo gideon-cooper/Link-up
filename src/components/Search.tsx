@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import { addEvent } from '../actions'
+import { useDispatch } from 'react-redux'
 
 const styles = {
   searchContainer: {
@@ -26,6 +28,8 @@ const styles = {
   },
 }
 export default function Search() {
+  const dispatch = useDispatch()
+  
   return (
     <Container fluid style={styles.searchContainer}>
       <Row style={styles.searchText}>
@@ -34,7 +38,12 @@ export default function Search() {
       <Row style={styles.searchBarContainer}>
         <Form inline>
           <FormControl type='text' placeholder='Search' />
-          <Button variant='outline-danger'>Search</Button>
+          <Button
+            onClick={() => dispatch(addEvent({ name: 'john' }))}
+            variant='outline-danger'
+          >
+            Search
+          </Button>
         </Form>
       </Row>
     </Container>
