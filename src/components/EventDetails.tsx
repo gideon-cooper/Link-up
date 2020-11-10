@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useParams } from 'react-router-dom'
 
 const styles = {
   container: {
@@ -40,25 +42,29 @@ const styles = {
 }
 
 export default function EventDetails(props) {
+  const params = useParams()
+  console.log(Object.values(params)[0])
+  const events = useSelector((state) => state.addEvent)
+  const eventDetails = events.find(
+    (event) => event.id === Object.values(params)[0]
+  )
+
   return (
     <Container style={styles.container}>
       <Row style={styles.topRow}>
         <Col style={styles.leftCol}>
-          <Image
-            src='https://www.sciencemag.org/sites/default/files/styles/article_main_large/public/dogs_1280p_0.jpg?itok=cnRk0HYq'
-            style={styles.image}
-          />
+          <Image src={eventDetails.image} style={styles.image} />
         </Col>
         <Col>
-          <h1>Event Title</h1>
+          <h1>{eventDetails.name}</h1>
           <ul>
             <li style={styles.dot}>
               <i className='fas fa-map-marker-alt'></i>
-              <p style={styles.inline}>Auckland, New Zealand</p>
+              <p style={styles.inline}>{eventDetails.location}</p>
             </li>
             <li style={styles.dot}>
               <i className='fas fa-users'></i>
-              <p style={styles.inline}>100 Attendees</p>
+              <p style={styles.inline}>{eventDetails.attendees} Attendees</p>
             </li>
           </ul>
           <Button variant='success'>Link up</Button>
@@ -67,12 +73,7 @@ export default function EventDetails(props) {
       <Row style={styles.bottomRow}>
         <Col style={styles.bottomCol}>
           <h1>About</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
-            eum expedita nobis, sapiente incidunt pariatur sed temporibus natus
-            explicabo similique perspiciatis aperiam consequatur, quibusdam
-            alias, quos voluptatibus numquam assumenda repudiandae.
-          </p>
+          <p>{eventDetails.description}</p>
         </Col>
         <Col></Col>
       </Row>
