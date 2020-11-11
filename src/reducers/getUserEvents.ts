@@ -1,6 +1,6 @@
 import {GETUSER_EVENTS} from "../actions"
 
-const initialState = []
+const initialState: object[] = []
 
 const getUserEvents = (state = initialState, action) => {
     switch(action.type){

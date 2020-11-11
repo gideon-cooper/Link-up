@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useParams } from 'react-router-dom'
-import { userEvents } from '../actions'
+import { useParams } from 'react-router-dom'
 import firebase from '../firebase/firebase'
 
 const styles = {
@@ -44,56 +43,77 @@ const styles = {
 }
 
 export default function EventDetails(props) {
-  const params = useParams()
+  const params: object = useParams()
   const dispatch = useDispatch()
-  console.log(Object.values(params)[0])
   const events = useSelector((state) => state.addEvent)
+  const userEvents = useSelector((state) => state.getUserEvents)
+
   const eventDetails = events.find(
     (event) => event.id === Object.values(params)[0]
   )
-  const handleClick = () => {
-    const eventsRef = firebase
-      .firestore()
-      .collection('users')
-      .doc(localStorage.getItem('authToken'))
 
-    eventsRef.update({
-      events: firebase.firestore.FieldValue.arrayUnion(eventDetails),
-    })
-    dispatch(userEvents(eventDetails))
-    console.log(eventsRef)
+  const handleClick = () => {
+    {
+      localStorage.getItem('authToken')
+        ? firebase
+            .firestore()
+            .collection('users')
+            .doc(localStorage.getItem('authToken'))
+            .update({
+              events: firebase.firestore.FieldValue.arrayUnion(eventDetails),
+            })
+            .then(() => {
+              dispatch(userEvents(eventDetails))
+            })
+        : props.history.push('/login')
+    }
   }
-  console.log(props)
   return (
-    <Container style={styles.container}>
-      <Row style={styles.topRow}>
-        <Col style={styles.leftCol}>
-          <Image src={eventDetails.image} style={styles.image} />
-        </Col>
-        <Col>
-          <h1>{eventDetails.name}</h1>
-          <ul>
-            <li style={styles.dot}>
-              <i className='fas fa-map-marker-alt'></i>
-              <p style={styles.inline}>{eventDetails.location}</p>
-            </li>
-            <li style={styles.dot}>
-              <i className='fas fa-users'></i>
-              <p style={styles.inline}>{eventDetails.attendees} Attendees</p>
-            </li>
-          </ul>
-          <Button onClick={handleClick} variant='success'>
-            Link up
-          </Button>
-        </Col>
-      </Row>
-      <Row style={styles.bottomRow}>
-        <Col style={styles.bottomCol}>
-          <h1>About</h1>
-          <p>{eventDetails.description}</p>
-        </Col>
-        <Col></Col>
-      </Row>
-    </Container>
+    <>
+      {eventDetails ? (
+        <Container style={styles.container}>
+          <Row style={styles.topRow}>
+            <Col style={styles.leftCol}>
+              <Image src={eventDetails.image} style={styles.image} />
+            </Col>
+            <Col>
+              <h1>{eventDetails.name}</h1>
+              <ul>
+                <li style={styles.dot}>
+                  <i className='fas fa-map-marker-alt'></i>
+                  <p style={styles.inline}>{eventDetails.location}</p>
+                </li>
+                <li style={styles.dot}>
+                  <i className='fas fa-users'></i>
+                  <p style={styles.inline}>
+                    {eventDetails.attendees} Attendees
+                  </p>
+                </li>
+              </ul>
+              {userEvents.find(
+                (event) => event.id === Object.values(params)[0]
+              ) ? (
+                <Button onClick={handleClick} variant='danger'>
+                  Unattend
+                </Button>
+              ) : (
+                <Button onClick={handleClick} variant='success'>
+                  Link up
+                </Button>
+              )}
+            </Col>
+          </Row>
+          <Row style={styles.bottomRow}>
+            <Col style={styles.bottomCol}>
+              <h1>About</h1>
+              <p>{eventDetails.description}</p>
+            </Col>
+            <Col></Col>
+          </Row>
+        </Container>
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </>
   )
 }

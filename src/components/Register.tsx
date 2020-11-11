@@ -24,8 +24,8 @@ export default function Register() {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
-        const uid = response.user.uid
-        const data = {
+        const uid: string = response.user.uid
+        const data: object = {
           id: uid,
           events: [],
           email,

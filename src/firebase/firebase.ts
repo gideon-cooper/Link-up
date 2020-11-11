@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-const firebaseConfig = {
+const firebaseConfig: object = {
     apiKey: 'AIzaSyBatTI3QBsev4N4NHyOVCSSmGzvJvE6ftA',
     authDomain: 'linkup-a14d2.firebaseapp.com',
     databaseURL: 'https://linkup-a14d2.firebaseio.com',

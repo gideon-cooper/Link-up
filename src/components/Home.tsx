@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ReactComponentElement, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Search from './Search'
@@ -14,23 +14,7 @@ const styles = {
   },
 }
 export default function Home() {
-  const dispatch = useDispatch()
   const events = useSelector((state) => state.addEvent)
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('events')
-      .get()
-      .then((event) =>
-        events.length === 0
-          ? event.docs.map((event) => {
-              const data = { id: event.id, ...event.data() }
-              dispatch(addEvent(data))
-            })
-          : null
-      )
-  }, [])
-  console.log(events)
   return (
     <>
       <Search />

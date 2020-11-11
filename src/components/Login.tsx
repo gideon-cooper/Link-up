@@ -20,7 +20,7 @@ export default function Login(props) {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        const uid = response.user.uid
+        const uid: string = response.user.uid
         const usersRef = firebase.firestore().collection('users')
         usersRef
           .doc(uid)
@@ -34,7 +34,6 @@ export default function Login(props) {
             localStorage.setItem('authToken', user.id)
             props.history.push('/')
             window.location.reload()
-            console.log('WORK', user)
           })
           .catch((error) => {
             alert(error)

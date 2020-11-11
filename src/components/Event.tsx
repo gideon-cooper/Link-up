@@ -1,10 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
 
 export default function Event(props) {
-  console.log(props)
   return (
     <Link to={`/eventDetails/${props.id}`} style={{ textDecoration: 'none' }}>
       <Card className='text-white' style={{ width: '18rem', height: '11rem' }}>

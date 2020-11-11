@@ -45,19 +45,7 @@ const styles = {
 
 export default function Profile() {
   const events = useSelector((state) => state.getUserEvents)
-  console.log(events, 'EV')
-  const dispatch = useDispatch()
-  useEffect(() => {
-    const eventsRef = firebase
-      .firestore()
-      .collection('users')
-      .doc(localStorage.getItem('authToken'))
-      .get()
-      .then((res) => {
-        console.log(res.data().events)
-        dispatch(getUserEvents(res.data().events))
-      })
-  }, [])
+
   return (
     <Container style={styles.container}>
       <Row style={styles.topRow}>
