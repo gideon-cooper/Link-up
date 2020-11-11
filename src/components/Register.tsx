@@ -27,6 +27,7 @@ export default function Register() {
         const uid = response.user.uid
         const data = {
           id: uid,
+          events: [],
           email,
         }
         const usersRef = firebase.firestore().collection('users')

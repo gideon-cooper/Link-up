@@ -1,5 +1,6 @@
 export const ADD_EVENT = 'ADD_EVENT'
-export const TOTAL_EVENTS = "TOTAL_EVENTS"
+export const USER_EVENTS = "USER_EVENTS"
+export const GETUSER_EVENTS = "GETUSER_EVENTS"
 
 export const addEvent = (event) => {
     return  {
@@ -7,9 +8,15 @@ export const addEvent = (event) => {
         event
     }
 }
-export const totalEvents = (events) => {
+export const userEvents = (events) => {
     return {
-        type: TOTAL_EVENTS,
+        type: USER_EVENTS,
+        events
+    }
+}
+export const getUserEvents = (events) => {
+    return {
+        type: GETUSER_EVENTS,
         events
     }
 }

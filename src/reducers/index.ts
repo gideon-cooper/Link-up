@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
 import addEvent from "./addEvent"
-import totalEvents from "./totalEvents"
+import userEvents from "./userEvents"
+import getUserEvents from "./getUserEvents"
 
 export default combineReducers({
     addEvent,
-    totalEvents
+    userEvents,
+    getUserEvents
 })

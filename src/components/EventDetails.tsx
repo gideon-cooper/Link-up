@@ -6,6 +6,8 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
+import { userEvents } from '../actions'
+import firebase from '../firebase/firebase'
 
 const styles = {
   container: {
@@ -43,12 +45,25 @@ const styles = {
 
 export default function EventDetails(props) {
   const params = useParams()
+  const dispatch = useDispatch()
   console.log(Object.values(params)[0])
   const events = useSelector((state) => state.addEvent)
   const eventDetails = events.find(
     (event) => event.id === Object.values(params)[0]
   )
+  const handleClick = () => {
+    const eventsRef = firebase
+      .firestore()
+      .collection('users')
+      .doc(localStorage.getItem('authToken'))
 
+    eventsRef.update({
+      events: firebase.firestore.FieldValue.arrayUnion(eventDetails),
+    })
+    dispatch(userEvents(eventDetails))
+    console.log(eventsRef)
+  }
+  console.log(props)
   return (
     <Container style={styles.container}>
       <Row style={styles.topRow}>
@@ -67,7 +82,9 @@ export default function EventDetails(props) {
               <p style={styles.inline}>{eventDetails.attendees} Attendees</p>
             </li>
           </ul>
-          <Button variant='success'>Link up</Button>
+          <Button onClick={handleClick} variant='success'>
+            Link up
+          </Button>
         </Col>
       </Row>
       <Row style={styles.bottomRow}>
