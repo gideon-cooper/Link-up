@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { removeUserEvent, getUserEvents, addUserEvent } from '../actions'
 import firebase from '../firebase/firebase'
 
 const styles = {
@@ -63,11 +64,24 @@ export default function EventDetails(props) {
               events: firebase.firestore.FieldValue.arrayUnion(eventDetails),
             })
             .then(() => {
-              dispatch(userEvents(eventDetails))
+              dispatch(addUserEvent(eventDetails))
             })
         : props.history.push('/login')
     }
   }
+  const handleUnattend = () => {
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(localStorage.getItem('authToken'))
+      .update({
+        events: firebase.firestore.FieldValue.arrayRemove(eventDetails),
+      })
+      .then(() => {
+        dispatch(removeUserEvent(eventDetails))
+      })
+  }
+  console.log(userEvents)
   return (
     <>
       {eventDetails ? (
@@ -93,7 +107,7 @@ export default function EventDetails(props) {
               {userEvents.find(
                 (event) => event.id === Object.values(params)[0]
               ) ? (
-                <Button onClick={handleClick} variant='danger'>
+                <Button onClick={handleUnattend} variant='danger'>
                   Unattend
                 </Button>
               ) : (

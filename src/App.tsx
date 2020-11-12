@@ -12,6 +12,7 @@ import { getUserEvents, addEvent } from './actions'
 import { useDispatch, useSelector } from 'react-redux'
 function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
     firebase
       .firestore()
