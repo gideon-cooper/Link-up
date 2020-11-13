@@ -5,7 +5,8 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import { addEvent } from '../actions'
+import { addEvent, search } from '../actions'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 const styles = {
@@ -33,15 +34,18 @@ const styles = {
     width: '70%',
   },
 }
-export default function Search() {
+export default function Search(props) {
+  console.log(props)
+  const history = useHistory()
+  console.log(history)
   const dispatch = useDispatch()
-  const [search, setSearch] = useState('')
+  const [searchDetails, setSearchDetails] = useState('')
   const events = useSelector((state) => state.addEvent)
-  console.log(events)
+
   const handleClick = () => {
-    const regex = new RegExp(search, 'gi')
-    console.log(events.filter((item) => regex.test(item.name)))
-    console.log('events', events)
+    const regex = new RegExp(searchDetails, 'gi')
+    dispatch(search(events.filter((item) => regex.test(item.name))))
+    history.push(`/searchDetails/${searchDetails}`)
   }
   return (
     <Container fluid style={styles.searchContainer}>
@@ -55,7 +59,7 @@ export default function Search() {
           <FormControl
             style={styles.input}
             type='text'
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearchDetails(e.target.value)}
             placeholder='Search'
           />
           <Button style={styles.button} onClick={handleClick}>

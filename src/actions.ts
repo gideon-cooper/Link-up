@@ -3,6 +3,7 @@ export const USER_EVENTS = "USER_EVENTS"
 export const ADDUSER_EVENT = "ADDUSER_EVENT"
 export const GETUSER_EVENTS = "GETUSER_EVENTS"
 export const REMOVEUSER_EVENT = "REMOVEUSER_EVENT"
+export const SEARCH = "SEARCH"
 
 export const addEvent = (event: object) => {
     return  {
@@ -14,6 +15,12 @@ export const userEvents = (events: object[]) => {
     return {
         type: USER_EVENTS,
         events
+    }
+}
+export const search = (details: object[]) => {
+    return {
+        type: SEARCH,
+        details
     }
 }
 export const addUserEvent = (event: object) => {

@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
 import Navigation from './components/Navigation'
+import SearchDetails from './components/SearchDetails'
 import Profile from './components/Profile'
 import EventDetails from './components/EventDetails'
 import firebase from './firebase/firebase'
@@ -46,6 +47,7 @@ function App() {
       <Route exact path='/register' component={Register} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/eventDetails/:id' component={EventDetails} />
+      <Route exact path='/searchDetails/:search' component={SearchDetails} />
     </div>
   )
 }
