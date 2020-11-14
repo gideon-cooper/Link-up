@@ -43,32 +43,46 @@ const styles = {
   },
 }
 
-export default function Profile() {
+export default function Profile(props) {
   const events = useSelector((state) => state.getUserEvents)
 
   return (
-    <Container style={styles.container}>
-      <Row style={styles.topRow}>
-        <Col style={styles.leftCol}>
-          <Image
-            src='https://i.stack.imgur.com/l60Hf.png'
-            style={styles.image}
-          />
-        </Col>
-        <Col>
-          <h1>NAME</h1>
-        </Col>
-      </Row>
-      <Row style={styles.bottomRow}>
-        <Col style={styles.bottomCol}>
-          <CardColumns>
-            {events.map((event) => (
-              <Event key={event.id} {...event} />
-            ))}
-          </CardColumns>
-        </Col>
-        <Col></Col>
-      </Row>
-    </Container>
+    <>
+      {localStorage.getItem('authToken') ? (
+        <Container style={styles.container}>
+          <Row style={styles.topRow}>
+            <Col style={styles.leftCol}>
+              <Image
+                src='https://i.stack.imgur.com/l60Hf.png'
+                style={styles.image}
+              />
+            </Col>
+            <Col>
+              <h1>NAME</h1>
+            </Col>
+          </Row>
+          <Row style={styles.bottomRow}>
+            <Col style={styles.bottomCol}>
+              <h1
+                style={{
+                  textAlign: 'center',
+                  letterSpacing: 4,
+                  color: '#E51937',
+                }}
+              >
+                Upcoming Linkups
+              </h1>
+              <CardColumns>
+                {events.map((event) => (
+                  <Event key={event.id} {...event} />
+                ))}
+              </CardColumns>
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <h1>Please login to see your profile</h1>
+      )}
+    </>
   )
 }

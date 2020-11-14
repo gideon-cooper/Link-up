@@ -19,7 +19,11 @@ export default function SearchDetails() {
     <>
       <Search />
       <Container style={styles.container}>
-        <h1>Your search results...</h1>
+        {search.length === 0 ? (
+          <h1>No results found</h1>
+        ) : (
+          <h1>Your search results...</h1>
+        )}
         <CardColumns>
           {search.map((event) => (
             <Event key={event.id} {...event} />

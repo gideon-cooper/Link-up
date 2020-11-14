@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router-dom'
 import FormControl from 'react-bootstrap/FormControl'
 
 const styles = {
@@ -22,8 +23,10 @@ const styles = {
 }
 
 export default function Navigation() {
+  const history = useHistory()
   const handleClick = () => {
     localStorage.removeItem('authToken')
+    history.push('/')
     window.location.reload()
   }
   return (
