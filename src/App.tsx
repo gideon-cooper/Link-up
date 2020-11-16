@@ -33,6 +33,7 @@ function App() {
             .doc(localStorage.getItem('authToken'))
             .get()
             .then((res) => {
+              // console.log(res.data())
               dispatch(getUserEvents(res.data().events))
             })
         : dispatch(getUserEvents([]))

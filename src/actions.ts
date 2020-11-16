@@ -4,10 +4,18 @@ export const ADDUSER_EVENT = "ADDUSER_EVENT"
 export const GETUSER_EVENTS = "GETUSER_EVENTS"
 export const REMOVEUSER_EVENT = "REMOVEUSER_EVENT"
 export const SEARCH = "SEARCH"
+export const ADD_PERSON = "ADD_PERSON"
 
 export const addEvent = (event: object) => {
     return  {
         type: ADD_EVENT,
+        event
+    }
+}
+
+export const addPerson = (event: object) => {
+    return  {
+        type: ADD_PERSON,
         event
     }
 }

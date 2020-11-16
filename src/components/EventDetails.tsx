@@ -54,6 +54,14 @@ export default function EventDetails(props) {
   )
 
   const handleClick = () => {
+    const newAttendees: number = (eventDetails.attendees += 1)
+    const newEvent = {
+      ...eventDetails,
+      attendees: newAttendees,
+    }
+    console.log(newEvent)
+    console.log(newAttendees)
+    // console.log(eventDetails.attendees++)
     {
       localStorage.getItem('authToken')
         ? firebase
@@ -61,10 +69,17 @@ export default function EventDetails(props) {
             .collection('users')
             .doc(localStorage.getItem('authToken'))
             .update({
-              events: firebase.firestore.FieldValue.arrayUnion(eventDetails),
+              events: firebase.firestore.FieldValue.arrayUnion(newEvent),
             })
             .then(() => {
-              dispatch(addUserEvent(eventDetails))
+              firebase
+                .firestore()
+                .collection('events')
+                .doc(newEvent.id)
+                .update({
+                  attendees: newEvent.attendees,
+                })
+              dispatch(addUserEvent(newEvent))
             })
         : props.history.push('/login')
     }
@@ -78,6 +93,13 @@ export default function EventDetails(props) {
         events: firebase.firestore.FieldValue.arrayRemove(eventDetails),
       })
       .then(() => {
+        firebase
+          .firestore()
+          .collection('events')
+          .doc(eventDetails.id)
+          .update({
+            attendees: eventDetails.attendees -= 1,
+          })
         dispatch(removeUserEvent(eventDetails))
       })
   }
