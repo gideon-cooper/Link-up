@@ -15,18 +15,12 @@ const styles = {
     padding: 0,
   },
   topRow: {
-    height: '60%',
+    height: '40%',
   },
   bottomRow: {
-    height: '60%',
+    height: '46%',
   },
-  leftCol: {
-    padding: 0,
-    maxWidth: '100%',
-    maxHeight: '100%',
-    flex: 1.2,
-  },
-  rightCol: {},
+
   image: {
     width: '100%',
     height: '100%',
@@ -51,13 +45,7 @@ export default function Profile(props) {
       {localStorage.getItem('authToken') ? (
         <Container style={styles.container}>
           <Row style={styles.topRow}>
-            <Col style={styles.leftCol}>
-              <Image
-                src='https://i.stack.imgur.com/l60Hf.png'
-                style={styles.image}
-              />
-            </Col>
-            <Col>
+            <Col style={{ textAlign: 'center' }}>
               <h1>NAME</h1>
             </Col>
           </Row>

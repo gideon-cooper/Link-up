@@ -59,9 +59,7 @@ export default function EventDetails(props) {
       ...eventDetails,
       attendees: newAttendees,
     }
-    console.log(newEvent)
-    console.log(newAttendees)
-    // console.log(eventDetails.attendees++)
+
     {
       localStorage.getItem('authToken')
         ? firebase
@@ -144,7 +142,6 @@ export default function EventDetails(props) {
               <h1>About</h1>
               <p>{eventDetails.description}</p>
             </Col>
-            <Col></Col>
           </Row>
         </Container>
       ) : (

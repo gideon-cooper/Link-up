@@ -7,7 +7,7 @@ export default function Event(props) {
     <Link to={`/eventDetails/${props.id}`} style={{ textDecoration: 'none' }}>
       <Card
         className='text-white'
-        style={{ width: '18rem', height: '11rem', marginTop: '1rem' }}
+        style={{ width: '100%', height: '11rem', marginTop: '1rem' }}
       >
         <Card.Img src={props.image} style={{ width: '100%', height: '100%' }} />
         <Card.ImgOverlay style={{ display: 'flex', flexDirection: 'column' }}>

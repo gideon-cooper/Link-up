@@ -19,9 +19,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '2em',
     color: 'white',
+    textAlign: 'center' as 'center',
+  },
+  text: {
+    fontSize: '1em',
     letterSpacing: 4,
+    maxWidth: '100%',
+    height: '100%',
   },
   searchBarContainer: {
     height: '50%',
@@ -29,11 +34,18 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: { display: 'inline' },
+  form: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  button: { width: '30%', display: 'inline' },
   input: {
     width: '70%',
+    marginRight: 0,
+    display: 'inline',
   },
 }
+
 export default function Search(props) {
   console.log(props)
   const history = useHistory()
@@ -50,12 +62,14 @@ export default function Search(props) {
   return (
     <Container fluid style={styles.searchContainer}>
       <Row style={styles.searchText}>
-        <Row style={{ textAlign: 'center', width: '30%', maxHeight: '100%' }}>
-          Find your next Linkup
+        <Row
+          style={{ textAlign: 'center', maxWidth: '100%', maxHeight: '100%' }}
+        >
+          <span style={styles.text}>Find your next Linkup</span>
         </Row>
       </Row>
       <Row style={styles.searchBarContainer}>
-        <Form inline style={{ width: '30%', maxHeight: '100%' }}>
+        <Form style={styles.form}>
           <FormControl
             style={styles.input}
             type='text'
