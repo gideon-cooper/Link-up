@@ -14,22 +14,9 @@ const styles = {
     height: '100vh',
     padding: 0,
   },
-  topRow: {
-    height: '50%',
-  },
-  bottomRow: {
-    height: '60%',
-  },
-  leftCol: {
-    padding: 0,
-    maxWidth: '100%',
-    maxHeight: '100%',
-    flex: 1.5,
-  },
-  rightCol: {},
   image: {
     width: '100%',
-    height: '100%',
+    maxHeight: '100%',
   },
   inline: {
     display: 'inline',
@@ -105,12 +92,12 @@ export default function EventDetails(props) {
   return (
     <>
       {eventDetails ? (
-        <Container style={styles.container}>
-          <Row style={styles.topRow}>
-            <Col style={styles.leftCol}>
+        <Container fluid='sm'>
+          <Row style={{ height: '50%' }}>
+            <Col style={{ height: '50%' }}>
               <Image src={eventDetails.image} style={styles.image} />
             </Col>
-            <Col>
+            <Col style={{ maxHeight: '50%' }}>
               <h1>{eventDetails.name}</h1>
               <ul>
                 <li style={styles.dot}>
@@ -137,7 +124,7 @@ export default function EventDetails(props) {
               )}
             </Col>
           </Row>
-          <Row style={styles.bottomRow}>
+          <Row style={{ maxHeight: '50%' }}>
             <Col style={styles.bottomCol}>
               <h1>About</h1>
               <p>{eventDetails.description}</p>
