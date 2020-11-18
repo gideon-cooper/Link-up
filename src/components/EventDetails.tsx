@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { removeUserEvent, getUserEvents, addUserEvent } from '../actions'
 import firebase from '../firebase/firebase'
+import './media.css'
 
 const styles = {
   container: {
@@ -15,19 +16,16 @@ const styles = {
     padding: 0,
   },
   topRow: {
-    height: '40%',
+    height: '50%',
   },
   bottomRow: {
-    height: '60%',
+    height: '50%',
   },
-  leftCol: {
-    padding: 0,
-    width: '100%',
-    maxHeight: '100%',
-  },
+  leftCol: {},
   rightCol: {
     width: '100%',
     height: '100%',
+    textAlign: 'center' as 'center',
   },
   image: {
     width: '100%',
@@ -43,6 +41,9 @@ const styles = {
   },
   bottomCol: {
     marginTop: '1em',
+  },
+  bottomImage: {
+    width: '100%',
   },
 }
 
@@ -109,13 +110,18 @@ export default function EventDetails(props) {
     <>
       {eventDetails ? (
         <Container style={styles.container}>
-          <Row style={styles.topRow}>
-            <Col style={styles.leftCol}>
-              <div style={{ width: '100%', height: '100%' }}>
-                <Image src={eventDetails.image} style={styles.image} />
-              </div>
+          <Row className='topRow' style={styles.topRow}>
+            <Col
+              className='topCol'
+              style={{
+                padding: 0,
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <Image src={eventDetails.image} style={styles.image} />
             </Col>
-            <Col style={styles.rightCol}>
+            <Col className='botCol' style={styles.rightCol}>
               <h1>{eventDetails.name}</h1>
               <ul>
                 <li style={styles.dot}>
@@ -142,7 +148,7 @@ export default function EventDetails(props) {
               )}
             </Col>
           </Row>
-          <Row style={styles.bottomRow}>
+          <Row className='bottomRow' style={styles.bottomRow}>
             <Col style={styles.bottomCol}>
               <h1>About</h1>
               <p>{eventDetails.description}</p>
