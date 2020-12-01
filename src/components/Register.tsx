@@ -11,7 +11,7 @@ const styles = {
     alignItems: 'center',
   },
 }
-export default function Register() {
+export default function Register(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -36,7 +36,7 @@ export default function Register() {
           .doc(uid)
           .set(data)
           .then(() => {
-            console.log('Done')
+            props.history.push('/')
           })
           .catch((error) => {
             alert(error)

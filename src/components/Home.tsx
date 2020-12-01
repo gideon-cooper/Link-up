@@ -5,6 +5,7 @@ import Search from './Search'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Event from './Event'
 import { useSelector } from 'react-redux'
+import { userInformation } from '../actions'
 
 const styles = {
   container: {
@@ -12,6 +13,7 @@ const styles = {
   },
 }
 export default function Home() {
+  console.log(userInformation)
   const events = useSelector((state) => state.addEvent)
   return (
     <>

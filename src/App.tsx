@@ -9,7 +9,7 @@ import SearchDetails from './components/SearchDetails'
 import Profile from './components/Profile'
 import EventDetails from './components/EventDetails'
 import firebase from './firebase/firebase'
-import { getUserEvents, addEvent } from './actions'
+import { getUserEvents, addEvent, userInformation } from './actions'
 import { useDispatch } from 'react-redux'
 function App() {
   const dispatch = useDispatch()
@@ -34,6 +34,7 @@ function App() {
             .get()
             .then((res) => {
               dispatch(getUserEvents(res.data().events))
+              dispatch(userInformation(res.data().email))
             })
         : dispatch(getUserEvents([]))
     }

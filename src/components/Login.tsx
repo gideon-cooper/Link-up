@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import Container from 'react-bootstrap/Container'
 import firebase from '../firebase/firebase'
+import { userInformation } from '../actions'
+import { useDispatch } from 'react-redux'
 const styles = {
   container: {
     display: 'flex',
@@ -13,6 +15,7 @@ const styles = {
 }
 
 export default function Login(props) {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const onLoginClick = (event) => {

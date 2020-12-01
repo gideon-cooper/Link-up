@@ -5,6 +5,7 @@ export const GETUSER_EVENTS = "GETUSER_EVENTS"
 export const REMOVEUSER_EVENT = "REMOVEUSER_EVENT"
 export const SEARCH = "SEARCH"
 export const ADD_PERSON = "ADD_PERSON"
+export const USER_INFORMATION = "USER_INFORMATION"
 
 export const addEvent = (event: object) => {
     return  {
@@ -12,7 +13,12 @@ export const addEvent = (event: object) => {
         event
     }
 }
-
+export const userInformation = (email:string) => {
+    return {
+        type: USER_INFORMATION, 
+        email
+    }
+}
 export const addPerson = (event: object) => {
     return  {
         type: ADD_PERSON,

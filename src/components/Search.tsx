@@ -49,7 +49,7 @@ const styles = {
 
 export default function Search(props) {
   const history = useHistory()
-  const [show, setShow] = useState(false)
+
   const dispatch = useDispatch()
   const [searchDetails, setSearchDetails] = useState('')
   const events = useSelector((state) => state.addEvent)
@@ -57,12 +57,8 @@ export default function Search(props) {
   const handleClick = (event) => {
     event.preventDefault()
     const regex = new RegExp(searchDetails, 'gi')
-    if (searchDetails.length === 0) {
-      setShow(true)
-    } else {
-      dispatch(search(events.filter((item) => regex.test(item.name))))
-      history.push(`/searchDetails/${searchDetails}`)
-    }
+    dispatch(search(events.filter((item) => regex.test(item.name))))
+    history.push(`/searchDetails/${searchDetails}`)
   }
   return (
     <Container fluid style={styles.searchContainer}>

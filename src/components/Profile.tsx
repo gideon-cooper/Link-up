@@ -7,7 +7,7 @@ import Image from 'react-bootstrap/Image'
 import { useSelector, useDispatch } from 'react-redux'
 import CardColumns from 'react-bootstrap/CardColumns'
 import firebase from '../firebase/firebase'
-import { getUserEvents } from '../actions'
+import { getUserEvents, userInformation } from '../actions'
 
 const styles = {
   container: {
@@ -39,6 +39,7 @@ const styles = {
 
 export default function Profile(props) {
   const events = useSelector((state) => state.getUserEvents)
+  const email = useSelector((state) => state.userInformation)
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function Profile(props) {
         <Container style={styles.container}>
           <Row style={styles.topRow}>
             <Col style={{ textAlign: 'center' }}>
-              <h1>NAME</h1>
+              <h1>{email}</h1>
             </Col>
           </Row>
           <Row style={styles.bottomRow}>
