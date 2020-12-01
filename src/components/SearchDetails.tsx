@@ -3,9 +3,7 @@ import Search from './Search'
 import Container from 'react-bootstrap/Container'
 import Event from './Event'
 import CardColumns from 'react-bootstrap/CardColumns'
-import { useDispatch, useSelector } from 'react-redux'
-import firebase from '../firebase/firebase'
-import { addEvent } from '../actions'
+import { useSelector } from 'react-redux'
 
 const styles = {
   container: {
@@ -14,7 +12,7 @@ const styles = {
 }
 export default function SearchDetails() {
   const search = useSelector((state) => state.search)
-  console.log(search)
+
   return (
     <>
       <Search />

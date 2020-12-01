@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import Alert from 'react-bootstrap/Alert'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
@@ -47,17 +48,21 @@ const styles = {
 }
 
 export default function Search(props) {
-  console.log(props)
   const history = useHistory()
-  console.log(history)
+  const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const [searchDetails, setSearchDetails] = useState('')
   const events = useSelector((state) => state.addEvent)
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault()
     const regex = new RegExp(searchDetails, 'gi')
-    dispatch(search(events.filter((item) => regex.test(item.name))))
-    history.push(`/searchDetails/${searchDetails}`)
+    if (searchDetails.length === 0) {
+      setShow(true)
+    } else {
+      dispatch(search(events.filter((item) => regex.test(item.name))))
+      history.push(`/searchDetails/${searchDetails}`)
+    }
   }
   return (
     <Container fluid style={styles.searchContainer}>
@@ -69,14 +74,15 @@ export default function Search(props) {
         </Row>
       </Row>
       <Row style={styles.searchBarContainer}>
-        <Form style={styles.form}>
+        <Form style={styles.form} onSubmit={handleClick}>
           <FormControl
             style={styles.input}
             type='text'
             onChange={(e) => setSearchDetails(e.target.value)}
             placeholder='Search'
+            required
           />
-          <Button style={styles.button} onClick={handleClick}>
+          <Button style={styles.button} type='submit'>
             Search
           </Button>
         </Form>

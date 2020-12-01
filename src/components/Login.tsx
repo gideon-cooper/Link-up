@@ -15,7 +15,8 @@ const styles = {
 export default function Login(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const onLoginClick = () => {
+  const onLoginClick = (event) => {
+    event.preventDefault()
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -43,7 +44,7 @@ export default function Login(props) {
 
   return (
     <Container style={styles.container}>
-      <Form>
+      <Form onSubmit={onLoginClick}>
         <Form.Text
           style={{ textAlign: 'center', fontSize: '2em', marginBottom: '1em' }}
         >
@@ -56,6 +57,7 @@ export default function Login(props) {
             name='email'
             type='email'
             placeholder='Enter email'
+            required
           />
         </Form.Group>
 
@@ -66,9 +68,10 @@ export default function Login(props) {
             onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Password'
+            required
           />
         </Form.Group>
-        <Button onClick={() => onLoginClick()} variant='primary'>
+        <Button type='submit' variant='primary'>
           Submit
         </Button>
       </Form>

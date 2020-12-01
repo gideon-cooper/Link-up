@@ -15,7 +15,8 @@ export default function Register() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const onRegisterClick = () => {
+  const onRegisterClick = (event) => {
+    event.preventDefault()
     if (password !== confirmPassword) {
       alert("Passwords don't match.")
       return
@@ -45,7 +46,7 @@ export default function Register() {
 
   return (
     <Container style={styles.container}>
-      <Form>
+      <Form onSubmit={onRegisterClick}>
         <Form.Text
           style={{ textAlign: 'center', fontSize: '2em', marginBottom: '1em' }}
         >
@@ -57,6 +58,7 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             type='email'
             placeholder='Enter email'
+            required
           />
           <Form.Text className='text-muted'>
             We'll never share your email with anyone else.
@@ -69,6 +71,7 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Password'
+            required
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
@@ -77,9 +80,10 @@ export default function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             type='password'
             placeholder='Confirm Password'
+            required
           />
         </Form.Group>
-        <Button onClick={() => onRegisterClick()} variant='primary'>
+        <Button type='submit' variant='primary'>
           Submit
         </Button>
       </Form>

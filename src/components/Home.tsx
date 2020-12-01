@@ -4,9 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Search from './Search'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Event from './Event'
-import { useDispatch, useSelector } from 'react-redux'
-import firebase from '../firebase/firebase'
-import { addEvent } from '../actions'
+import { useSelector } from 'react-redux'
 
 const styles = {
   container: {

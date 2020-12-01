@@ -10,7 +10,7 @@ import Profile from './components/Profile'
 import EventDetails from './components/EventDetails'
 import firebase from './firebase/firebase'
 import { getUserEvents, addEvent } from './actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 function App() {
   const dispatch = useDispatch()
 
@@ -33,7 +33,6 @@ function App() {
             .doc(localStorage.getItem('authToken'))
             .get()
             .then((res) => {
-              // console.log(res.data())
               dispatch(getUserEvents(res.data().events))
             })
         : dispatch(getUserEvents([]))
